@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Curriculum.Models
+{
+    public class Itens
+    {
+        SelectListItem[] estados = new SelectListItem[]
+        {
+            new SelectListItem { Value = "", Text = "--" },
+            new SelectListItem { Value = "AL", Text = "AL" },
+            new SelectListItem { Value = "AP", Text = "AP" },
+            new SelectListItem { Value = "AM", Text = "AM" },
+            new SelectListItem { Value = "BA", Text = "BA" },
+            new SelectListItem { Value = "CE", Text = "CE" },
+            new SelectListItem { Value = "DF", Text = "DF" },
+            new SelectListItem { Value = "ES", Text = "ES" },
+            new SelectListItem { Value = "GO", Text = "GO" },
+            new SelectListItem { Value = "MA", Text = "MA" },
+            new SelectListItem { Value = "MT", Text = "MT" },
+            new SelectListItem { Value = "MS", Text = "MS" },
+            new SelectListItem { Value = "MG", Text = "MG" },
+            new SelectListItem { Value = "PA", Text = "PA" },
+            new SelectListItem { Value = "PB", Text = "PB" },
+            new SelectListItem { Value = "PR", Text = "PR" },
+            new SelectListItem { Value = "PE", Text = "PE" },
+            new SelectListItem { Value = "PI", Text = "PI" },
+            new SelectListItem { Value = "RJ", Text = "RJ" },
+            new SelectListItem { Value = "RN", Text = "RN" },
+            new SelectListItem { Value = "RS", Text = "RS" },
+            new SelectListItem { Value = "RO", Text = "RO" },
+            new SelectListItem { Value = "RR", Text = "RR" },
+            new SelectListItem { Value = "SC", Text = "SC" },
+            new SelectListItem { Value = "SP", Text = "SP" },
+        };
+
+        /*
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>*/
+    }
+}

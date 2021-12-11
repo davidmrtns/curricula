@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Dados da vaga";
+    Curriculum.Models.Usuario u = (Curriculum.Models.Usuario)Session["Usuario"];
+    Curriculum.Models.Aluno aluno = (Curriculum.Models.Aluno)TempData["aluno"];
+    Curriculum.Models.Vaga v = (Curriculum.Models.Vaga)TempData["vaga"];
+    Curriculum.Models.Curso curso = (Curriculum.Models.Curso)TempData["curso"];
+    Curriculum.Models.Curso cursoFeito = (Curriculum.Models.Curso)TempData["cursoFeito"];
+    string seCandidatou = (string)TempData["seCandidatou"];
+    List<Curriculum.Models.Aluno> listaCandidatos = (List<Curriculum.Models.Aluno>)TempData["listaCandidatos"];
+}
+
+@if (u != null && v != null)
+{
+    <section class="info-vaga">
+        <p class="mensagem">@TempData["msg"]</p>
+        <h2 class="titulo">Dados da vaga</h2>
+
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">@v.NomeVaga - @v.NomeEmpresa</h2>
+
+                <table class="info">
+                    <tr>
+                        <td class="celula-titulo">Localização:</td>
+                        <td>@v.Cidade - @v.Estado</td>
+                    </tr>
+
+                    <tr>
+                        <td class="celula-titulo">Curso relacionado:</td>
+                        <td>@curso.NomeCurso (@curso.AbrevCurso)</td>
+                    </tr>
+                </table>
+
+            <div class="descricao">
+                <h2 class="subtitulo texto-esquerda">Descrição</h2>
+                <p>@v.Descricao</p>
+            </div>
+        </div>
+
+    @if (aluno != null && cursoFeito.AbrevCurso == curso.AbrevCurso)
+    {
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Candidatura</h2>
+
+            <!--Melhorar a forma de saber se o aluno está candidatado-->
+            @if (seCandidatou != null && seCandidatou.Equals("falso"))
+            {
+                <a href="~/Home/Candidatar/@v.CodVaga">Candidatar-se</a>
+            }
+            else if (seCandidatou != null && seCandidatou.Equals("verdadeiro"))
+            {
+                <p class="aviso">Você se candidatou nessa vaga. <a href="~/Home/RemoverCandidatura/@v.CodVaga" class="remover">Remover candidatura</a></p>
+            }
+        </div>
+    }
+    else if (u.Admin == true)
+    {
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Lista de candidatos</h2>
+
+            @if (listaCandidatos.Count > 0)
+            {
+                <ul>
+                    @foreach (Curriculum.Models.Aluno a in listaCandidatos)
+                    {
+                        <li><span>@a.CodAluno - @a.Nome - @a.CidadeResidencia <a href="~/Home/VerAluno/@a.CodAluno" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver perfil</a> <a href="~/Home/BaixarCurriculo/@a.CodAluno"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Baixar currículo</a></span></li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="aviso">Nenhum aluno se candidatou para essa vaga.</p>
+            }
+        </div>
+
+        <div class="centro links">
+            <h2 class="subtitulo texto-esquerda">Ações</h2>
+
+            <p><a href="~/Home/EditarVaga/@v.CodVaga"><i class="fa fa-pencil" aria-hidden="true"></i> Editar vaga</a></p>
+            <p><a href="~/Home/ExcluirVaga/@v.CodVaga" class="remover excluirVaga"><i class="fa fa-trash" aria-hidden="true"></i> Excluir vaga</a></p>
+        </div>
+    }
+    </section>
+}
+else
+{
+    <h2 class="titulo">Nada para mostrar aqui :(</h2>
+}

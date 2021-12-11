@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+@{
+    Curriculum.Models.Usuario u = (Curriculum.Models.Usuario)Session["Usuario"];
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Curriculum</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/estilo.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <header>
+        <div class="centro">
+            <div class="esquerda"><a class="logomarca" href="/">Curriculum</a></div>
+                <nav class="desktop direita">
+                    @if (u != null && u.Admin == true)
+                    {
+                        <a class="secao" href="~/Home/PesquisarAlunos">Pesquisar alunos</a>
+                    }
+
+                    <a href="~/Home/Conta"><i class="fa fa-user-circle-o icones" aria-hidden="true"></i></a>
+
+                    @if (u != null)
+                    {
+                        <a class="secao" href="~/Home/Desconectar">Sair</a>
+                    }
+                </nav>
+
+                <nav class="mobile direita">
+                    <div class="botao-mobile">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </div>
+                    <ul>
+                        <li><a href="~/Home/Conta">Conta</a></li>
+
+                        @if (u != null && u.Admin == true)
+                        {
+                            <li><a href="~/Home/PesquisarAlunos">Pesquisar alunos</a></li>
+                        }
+
+                        @if (u != null)
+                        {
+                            <li><a href="~/Home/Desconectar">Sair</a></li>
+                        }
+                    </ul>
+                </nav>
+            <div class="limpar"></div>
+        </div>
+    </header>
+
+    <main class="margem-body">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Curriculum</p>
+    </footer>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/inputmask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+﻿using Curriculum.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Curriculum.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult CadastrarAluno()
+        {
+            List<Curso> lista = Curso.listarCursos();
+            return View(lista);
+        }
+
+        public ActionResult Conta()
+        {
+            Usuario usuario = (Usuario)Session["Usuario"];
+
+            if (usuario != null && usuario.CodAluno != null)
+            {
+                Aluno aluno = new Aluno().buscarDados(usuario.CodAluno);
+                Curso curso = Curso.buscarCursoAluno(usuario.CodAluno);
+                TempData["aluno"] = aluno;
+                TempData["cursoFeito"] = curso;
+            }
+            
+            return View();
+        }
+
+        public ActionResult PesquisarAlunos()
+        {
+            List<Curso> lista = Curso.listarCursos();
+            return View(lista);
+        }
+
+        public ActionResult CadastrarCurso()
+        {
+            return View();
+        }
+
+        public ActionResult DadosAluno()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarAluno(string nome, string sobrenome, string bairro, string cidade, 
+            string cursoRealizado, string dataNascimento, string telefone, string cep, string estado, string arquivo,
+            string nomeUsuario, string senha)
+        {
+            string msg;
+
+            nome = Verificacao.validarString(nome);
+            sobrenome = Verificacao.validarString(sobrenome);
+            bairro = Verificacao.validarString(bairro);
+            cidade = Verificacao.validarString(cidade);
+
+            //mascaras para telefone, cep e estado
+            //usar construtor do aluno
+            if (nome != null && sobrenome != null && bairro != null && cidade != null
+                && cursoRealizado != null && telefone != null && cep != null /*arquivo != null*/ 
+                && nomeUsuario != null && senha != null)
+            {
+                Usuario usuario = new Usuario(nomeUsuario, senha, null, false);
+                usuario.inserirUsuario();
+
+                string nomeCompleto = nome + " " + sobrenome;
+
+                Aluno aluno = new Aluno(nomeCompleto, bairro, cidade, estado, cep, dataNascimento, telefone);
+
+                if(aluno.inserirAluno()){
+                    string codAluno = aluno.codAlunoTemp.ToString();
+
+                    Curso.inserirCursoFeito(codAluno, cursoRealizado);
+
+                    Curriculo curriculo = new Curriculo(codAluno, arquivo);
+
+                    //checar se o arquivo está sendo enviado corretamente
+                    curriculo.inserirCurriculo();
+
+                    usuario.CodAluno = codAluno;
+
+                    /*
+                    Usuario usuario = new Usuario(nomeUsuario, senha, codAluno, false);
+                    usuario.inserirUsuario();
+                    */
+
+                    msg = "Cadastrado com sucesso";
+                }
+                else
+                {
+                    msg = "Um erro ocorreu ao cadastrar. Tente novamente";
+                }
+            }
+            else
+            {
+                msg = "Preencha os campos corretamente";
+            }
+            //mostrar mensagem de sucesso no cadastro
+            TempData["msg"] = msg;
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Conta(string nomeUsuario, string senha)
+        {
+            //é criado um objeto Usuario através do método Autenticar()
+            Usuario u = Usuario.Autenticar(nomeUsuario, senha);
+            //se Usuario for nulo (a autenticação falhou),
+            if (u == null)
+            {
+                //adiciona a seguinte mensagem como TempData:
+                string msg = "Usuário ou senha incorretos";
+                TempData["msg"] = msg;
+            }
+            //caso Usuario seja diferente de nulo (a autenticaçaõ foi bem sucedida),
+            else if (u != null)
+            {
+                //adiciona uma sessão com o nome 'Usuario', passando todo o objeto criado
+                Session.Add("Usuario", u);
+                //uma mensagem de sucesso é adicionada como TempData
+                string msg = "Logado";
+                TempData["msg"] = msg;
+            }
+            //por fim, retorna a view 'Conta'
+            return RedirectToAction("Conta");
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarCurso(string nomeCurso, string abrevCurso)
+        {
+            nomeCurso = Verificacao.validarString(nomeCurso);
+            abrevCurso = Verificacao.validarString(abrevCurso); //remover espaços entre as palavras? Impedir espaços?
+
+            if (nomeCurso != null && abrevCurso != null)
+            {
+                Curso curso = new Curso(nomeCurso, abrevCurso);
+                curso.inserirCurso();
+                TempData["msg"] = "Curso cadastrado com sucesso";
+            }
+            return RedirectToAction("CadastrarCurso");
+        }
+
+        [HttpPost]
+        public ActionResult PesquisarAlunos(string nomeAluno, string cidade, string cursoRealizado)
+        {
+            nomeAluno = Verificacao.validarString(nomeAluno);
+            cidade = Verificacao.validarString(cidade);
+            cursoRealizado = Verificacao.validarString(cursoRealizado);
+
+            List<Aluno> listaAlunos = new List<Aluno>();
+
+            if (nomeAluno != null)
+            {
+                listaAlunos = Aluno.buscarInfo("aluno", "nome_aluno", nomeAluno);
+            }else if (cidade != null)
+            {
+                listaAlunos = Aluno.buscarInfo("aluno", "cidade_res", cidade);
+            }else if (cursoRealizado != null)
+            {
+                listaAlunos = Aluno.buscarInfo("cursofeito", "cod_curso", cursoRealizado);
+            }
+            else
+            {
+                listaAlunos = null;
+            }
+
+            TempData["listaAlunos"] = listaAlunos;
+            return RedirectToAction("PesquisarAlunos");
+        }
+
+        //desconecta o usuário da conta
+        public ActionResult Desconectar()
+        {
+            System.Web.HttpContext.Current.Session.RemoveAll();
+            //passa a seguinte mensagem como TempData:
+            TempData["msg"] = "Você saiu da sua conta";
+            //retorna para a view 'Conta'
+            return RedirectToAction("Conta");
+        }
+
+        public ActionResult ListarCursos()
+        {
+            List<Curso> lista = Curso.listarCursos();
+            TempData["listaCursos"] = lista;
+            return RedirectToAction("CadastrarCurso");
+        }
+
+        public ActionResult ExcluirCurso(string id)
+        {
+            Curso curso = Curso.buscarDadosCurso(id);
+            TempData["msg"] = curso.apagarCurso();
+            return RedirectToAction("CadastrarCurso");
+        }
+
+        public ActionResult ExcluirUsuario(string id)
+        {
+            Usuario u = (Usuario) Session["Usuario"];
+            string msg = "Não foi possível excluir sua conta";
+
+            if (u != null)
+            {
+                if (u.apagarUsuario())
+                {
+                    msg = "Conta excluída com sucesso";
+                    System.Web.HttpContext.Current.Session.RemoveAll();
+                }
+            }
+            TempData["msg"] = msg;
+            return RedirectToAction("Conta");
+        }
+
+        public ActionResult VerAluno(string id)
+        {
+            Aluno aluno = new Aluno().buscarDados(id);
+            Curso curso = Curso.buscarCursoAluno(id);
+            TempData["aluno"] = aluno;
+            TempData["cursoFeito"] = curso;
+            return RedirectToAction("DadosAluno");
+        }
+    }
+}

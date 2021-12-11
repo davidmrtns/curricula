@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Cadastrar vaga";
+    Curriculum.Models.Usuario u = (Curriculum.Models.Usuario)Session["Usuario"];
+    List<Curriculum.Models.Vaga> lista = (List<Curriculum.Models.Vaga>)TempData["listaVagas"];
+
+    Curriculum.Models.Itens i = new Curriculum.Models.Itens();
+    var estados = i.Estados;
+    var cursos = i.cursos(Model);
+}
+
+@if (u != null && u.Admin == true && Model != null)
+{
+    <section class="cadastro">
+        <p class="mensagem">@TempData["msg"]</p>
+
+        <div class="centro cadastrar">
+            <br />
+            <form method="post">
+                <div class="centro">
+                    <h2 class="titulo">Cadastrar vaga</h2>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Empresa contratante:</h2>
+                    <input type="text" placeholder="Nome da empresa" name="nomeEmpresa" id="campoNomeEmpresa" />
+                    <p id="pCampoNomeEmpresa"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Nome da vaga:</h2>
+                    <input type="text" placeholder="Nome da vaga" name="nomeVaga" id="campoNomeVaga" />
+                    <p id="pCampoNomeVaga"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Cidade:</h2>
+                    <input type="text" placeholder="Cidade" name="cidade" id="campoCidade" />
+                    <p id="pCampoCidade"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Estado:</h2>
+                    @Html.DropDownList("estado", new SelectList(estados, "Value", "Text"), new { @id = "campoEstado" })
+                    <p id="pCampoEstado"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Descrição:</h2>
+                    <textarea name="descricao" id="campoDescricao"></textarea>
+                    <p id="pCampoDescricao"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Curso relacionado:</h2>
+                    @Html.DropDownList("cursoRelacionado", new SelectList(cursos, "Value", "Text"), new { @id = "campoCurso"})
+                    <p id="pCampoCurso"></p>
+                </div>
+
+                <div class="centro">
+                    <input type="submit" value="Cadastrar" />
+                </div>
+            </form>
+            <br />
+        </div>
+
+        <div class="centro resultados">
+            <p><a href="~/Home/ListarVagas">Ver vagas cadastradas</a></p>
+            <p><a href="~/Home/ListarVagasCandidatadas">Ver vagas com candidatos</a></p>
+
+            @if (lista != null)
+            {
+                <ul>
+                    @foreach (Curriculum.Models.Vaga v in lista)
+                    {
+                        <li><span>@v.NomeVaga - @v.NomeEmpresa <a href="~/Home/VerVaga/@v.CodVaga" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver vaga</a> <a href="~/Home/EditarVaga/@v.CodVaga"><i class="fa fa-pencil" aria-hidden="true"></i> Editar vaga</a> <a href="~/Home/ExcluirVaga/@v.CodVaga" class="remover excluirVaga"><i class="fa fa-trash" aria-hidden="true"></i> Excluir vaga</a></span></li>
+                    }
+                </ul>
+            }
+        </div>
+    </section>
+}
+else
+{
+    <h2 class="titulo">Nada para mostrar aqui :(</h2>
+}

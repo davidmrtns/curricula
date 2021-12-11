@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Editar dados";
+    Curriculum.Models.Usuario u = (Curriculum.Models.Usuario)Session["Usuario"];
+    Curriculum.Models.Aluno a = (Curriculum.Models.Aluno)TempData["aluno"];
+    Curriculum.Models.Curso c = (Curriculum.Models.Curso)TempData["cursoFeito"];
+    Curriculum.Models.Curriculo curriculo = (Curriculum.Models.Curriculo)TempData["curriculo"];
+    List<Curriculum.Models.Curso> listaCursos = (List<Curriculum.Models.Curso>)TempData["cursos"];
+
+    Curriculum.Models.Itens i = new Curriculum.Models.Itens();
+    var estados = i.Estados;
+    var cursos = i.cursos(listaCursos);
+}
+@if (u != null)
+{
+    <div class="centro cadastrar">
+        <br />
+        <form method="post" enctype="multipart/form-data">
+            <div class="centro">
+                <h2 class="titulo">Editar dados</h2>
+            </div>
+
+            @if (a != null)
+            {
+                <div class="centro">
+                    <!--Máximo deve ser 40-->
+                    <h2 class="rotulo">Nome:</h2>
+                    <input type="text" placeholder="Nome" name="nome" id="campoNome" value="@a.Nome" />
+                    <p id="pCampoNome"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Data de nascimento:</h2>
+                    <input type="date" name="dataNascimento" min="1930-01-01" max="2020-01-01" value="@a.DataNascimento.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Telefone:</h2>
+                    <input type="text" placeholder="Telefone" name="telefone" class="tel" value="@a.Telefone" />
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Bairro:</h2>
+                    <input type="text" placeholder="Bairro" name="bairro" id="campoBairro" value="@a.Bairro" />
+                    <p id="pCampoBairro"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Cidade:</h2>
+                    <input type="text" placeholder="Cidade" name="cidade" id="campoCidade" value="@a.CidadeResidencia" />
+                    <p id="pCampoCidade"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Estado:</h2>
+                    @Html.DropDownList("estado", new SelectList(estados, "Value", "Text", Array.Find(estados, item => item.Value == a.Estado).Value))
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">CEP:</h2>
+                    <input type="text" placeholder="CEP" name="cep" class="cep" value="@a.Cep" />
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Curso realizado:</h2>
+                    @if (c != null)
+                    {
+                        @Html.DropDownList("cursoRealizado", new SelectList(cursos, "Value", "Text", Array.Find(cursos, item => item.Value == c.AbrevCurso).Value))
+                    }
+                    else
+                    {
+                        @Html.DropDownList("cursoRealizado", new SelectList(cursos, "Value", "Text"))
+                        <p class="aviso">Nenhum curso cadastrado. Selecione um acima</p>
+                    }
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Currículo:</h2>
+                    <input type="button" id="botaoArquivo" />
+                    <input type="file" name="arquivo" accept=".pdf, .docx" id="campoArquivo" />
+                    <p id="pCampoArquivo"></p>
+                    
+                    @if(curriculo != null)
+                    {
+                        <h3 class="curriculo"><a href="~/Home/BaixarCurriculo/@a.CodAluno">Currículo atual: @curriculo.NomeArquivo</a></h3>
+                    }
+                    else
+                    {
+                        <h3 class="curriculo">Você não possui nenhum currículo. Adicione um no campo acima</h3>
+                    }
+                </div>
+            }
+
+            <div class="centro">
+                <h2 class="rotulo">Nome de usuário:</h2>
+                <input type="text" placeholder="Nome de usuário" name="nomeUsuario" id="campoNomeUsuario" value="@u.NomeUsuario" />
+                <p id="pCampoNomeUsuario"></p>
+            </div>
+
+            <div class="centro">
+                <h2 class="rotulo">Senha:</h2>
+                <input type="password" placeholder="Senha" name="senha" class="senha" id="campoSenha" value="@u.Senha" />
+                <input type="password" placeholder="Confirme a senha" name="confirmacao" class="senha" id="campoConfirmacao" value="@u.Senha" />
+                <i class="fa fa-eye" aria-hidden="true" id="verSenha"></i>
+                <p id="pCampoConfirmacao"></p>
+                <div class="limpar"></div>
+            </div>
+
+            <div class="centro">
+                <input class="botao-cliente" type="submit" value="Salvar" />
+                <!--Botão para voltar-->
+            </div>
+        </form>
+        <br />
+    </div>
+}
+else
+{
+    <h2 class="titulo">Nada para mostrar aqui :(</h2>
+}
+
+

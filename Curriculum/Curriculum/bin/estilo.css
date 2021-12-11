@@ -1,0 +1,534 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;  
+}
+
+div.detalhes img {
+    max-width: 350px;
+}
+
+div.dados-usuario img{
+    width: 100%;
+    max-width: 150px;
+}
+
+div.dados-usuario div{
+    width: max-content;
+}
+
+div.dados-usuario h3{
+    margin-left: 10px;
+}
+
+div.dados-usuario h3.ocupacao{
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+}
+
+div.dados-usuario h3.nome-usuario{
+    font-size: 35px;
+    color: #071e61;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+div.link-aviso a {
+    text-align: center;
+    display: flow-root;
+    margin-top: 15px;
+    margin-bottom: 20px
+}
+
+li{
+    list-style-type: disc;
+    list-style-position: inside;
+    font-size: 17px;
+}
+
+li span{
+    position: relative;
+    left: -8px;
+}
+
+a.remover{
+    color: #b30202;
+}
+
+div.resultados ul{
+    text-align: center;
+}
+
+body {
+    background: #7691d6;
+}
+
+footer {
+    bottom: 0;
+    left: 0;
+    background: #4f56b8;
+    padding: 30px 0;
+    position: inherit;
+    width: 100%;
+    margin-bottom: -21px;
+}
+
+footer p {
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.divisao-rb{
+    width: 20%;
+    padding: 0 10px;
+}
+
+nav.desktop .secao {
+    font-size: 22px;
+    color: #1b2987;
+    margin-left: 6px;
+}
+
+h2.rotulo {
+    color: black;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+h2.titulo {
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 0;
+}
+
+div.esquerda .logomarca {
+    text-decoration: none;
+    font-size: 32px;
+    color: #003a8c;
+}
+
+a .icones {
+    margin-top: 10px;
+    margin-right: 2.5px;
+    margin-left: 10px;
+    color: #1b2b87;
+    font-size: 34px;
+}
+
+div.links p{
+    text-align: left;
+}
+
+.margem-body{
+    margin-top: 33px;
+    min-height: 100%;
+    position: relative;
+}
+
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: #596cba;
+    padding: 20px 0;
+}
+
+nav.desktop ul {
+    list-style-type: none;
+    position: relative;
+    top: 36px;
+}
+
+nav.desktop li {
+    font-weight: 300;
+    font-size: 15px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+nav.desktop a {
+    color: #7A7A7A;
+    text-decoration: none;
+}
+
+
+nav.desktop i:hover, div.esquerda a:hover, a.secao:hover {
+    transition: 1s;
+    color: rgba(27, 83, 135, 1);
+}
+
+input[type=submit]:hover{
+    transition: 1s;
+    background: rgba(27, 83, 135, 1);
+}
+
+.barraNavegacao{
+    background-color: #4f8429;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.imagem{
+    width: 100%;
+}
+
+.imagemLogo{
+    margin-top: 100px;
+    width: 100%;
+    max-width: 561px;
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.imagemBanner{
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: -10px;
+}
+
+.icone{
+    width: 70%;
+    margin-left: 35px;
+    margin-top: 35px;
+    max-width: 148px;
+}
+
+p{
+    text-align: center;
+}
+
+div.detalhes h2, div.info-conta h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    color: #26b01c;
+    font-size: 27px;
+}
+
+table{
+    width: 70% !important;
+    margin-bottom: 25px;
+    border: 0;
+    font-size: 25px;
+}
+
+table.info-aluno td.celula-titulo{
+    font-weight: bold;
+}
+
+td{
+    font-size: 17px;
+}
+
+h3{
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+h3.curriculo{
+    font-weight: bold;
+}
+
+h2.subtitulo.texto-esquerda{
+    text-align: left;
+}
+
+div.detalhes h3, div.info-conta h3{
+    font-weight: bold;
+}
+
+div.info-conta .sub-subtitulo{
+    font-weight: bold;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 15px;
+    color: #68942e;
+}
+
+.subtitulo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    text-align: center;
+    color: #013263;
+    font-size: 27px;
+}
+
+p.mensagem {
+    margin-top: 50px;
+    color: #162b80;
+}
+
+p.aviso{
+    font-size: 17px;  
+    text-align: left;
+    color: #013391;
+}
+
+.botao-cliente{
+    margin-top: 45px;
+}
+
+form input[type=text], input[type=password], input[type=date], input[type=button], select, textarea{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 5px;
+    background: white;
+    color: #333;
+    font-size: 15px;
+    padding-left: 10px;
+    border: 1px solid #CCC;
+    outline: 0;
+}
+
+form textarea{
+    resize: none;
+    height: 150px;
+    padding: 8px;
+}
+
+input[type=file]{
+    display: none;
+}
+
+div.cadastrar input[type=text], div.cadastrar input[type=password], div.cadastrar input[type=date], 
+div.cadastrar input[type=button], div.cadastrar input[type="submit"], div.cadastrar select, div.cadastrar textarea{
+    max-width: 670px;
+}
+
+div.cadastrar h2.rotulo{
+    text-align: left;
+}
+
+div.cadastrar i{
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+div.cadastrar{
+    max-width: 720px;
+    border-radius: 9px;
+    background-color: #d1ddff;
+    margin-top: 75px;
+    margin-bottom: 35px;
+    box-shadow: 1px 1px 8px 1px #86868691;
+}
+
+div.cadastrar div{
+    width: 100%;
+}
+
+.botao-login {
+    margin-top: 20px;
+}
+
+form input[type=submit]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9px;
+    height: 50px;
+    background: #003aad;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    border: 0;
+    width: 100%;
+}
+
+.divisao2{
+    padding: 0 10px;
+    width: 50%;
+}
+
+.divisao3{
+    width: 33.3%;
+    padding: 0 10px;
+}
+
+.esquerda{
+    float: left;
+}
+
+.direita{
+    float: right;
+}
+
+.limpar{
+    clear: both;
+}
+
+.centro{
+    padding: 0 3%;
+    margin:0 auto;
+}
+
+form div.centro{
+    padding: 0 1%;
+}
+
+.alinhar{
+    width: 93%;
+    max-width: 500px;
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform:translate(-50%,-50%);
+}
+
+section.banner{
+    background: #87e985;
+}
+
+section.descricao-autor{
+    padding: 40px 0;
+    background: #a2faa0;
+}
+
+section.descricao-autor h2 {
+    font-size: 28px;
+    font-weight: 400;
+    color: #4f8429;
+     font-weight: bold;
+}
+
+section.descricao-autor p {
+    font-size: 16px;
+    color: #4f8429;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+section.especialidade{
+    padding: 40px 0;
+     background: #a2faa0;
+}
+
+section.especialidade h2.title{
+    font-size: 30px;
+    text-align: center;
+    font-weight: 400;
+    background: #4f8429;
+    color: #a2faa0;
+}
+
+.box-especialidade{
+    margin: 40px 0;
+    padding: 0 30px;
+    text-align: center;
+}
+
+.box-especialidade h3{
+    color: #4f8429;
+    font-size: 40px;
+}
+
+.box-especialidade h4{
+    font-weight: 300;
+    font-size: 25px;
+    color: #4f8429;
+}
+
+.box-especialidade p{
+    color: #444;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+section.extras{
+    padding: 30px 0;
+    background: #4f8429;
+}
+
+.servicos-container,.depoimentos-container{
+    padding: 0 30px; 
+}
+
+section.extras .title{
+    color: #a2faa0;
+    font-weight: 300;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.depoimento-single{
+    padding: 15px 0;
+    border-bottom: solid #a2faa0;
+}
+
+p.depoimento-descricao{
+    font-size: 15px;
+    color: white; 
+    font-weight: 300;
+}
+
+p.nome-autor{
+    font-size: 15px;
+    color: white; 
+    margin-top: 5px;
+    font-weight: bold;
+}
+.servicos ul{
+    margin: 30px 0;
+}
+
+.caixa-produtos{
+    margin: 40px 0;
+    text-align: center;
+}
+
+.caixa-produtos h4{
+    font-weight: 300;
+    color: #5f7835;
+    font-size: 23px;
+}
+
+.caixa-produtos a{
+    color: #444;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.caixa-produtos img{
+    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    padding: 0 10px;
+}
+
+.zoom img {
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.zoom img:hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}

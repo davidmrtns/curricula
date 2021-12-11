@@ -1,0 +1,143 @@
+﻿$(document).ready(function () {
+    $('.tel').inputmask("(99)99999-9999");
+    $('.cep').inputmask("99999-999");
+
+    //exceção atrapalhando a execução do código
+    //pensar em número mínimo de caracteres para nome, sobrenome, cidade etc
+
+    document.getElementById('campoNomeCurso').addEventListener("keyup", function () { validarCampos(this, 0, 20, 'pCampoNomeCurso', 'texto') });
+    document.getElementById('campoAbrevCurso').addEventListener("keyup", function () { validarCampos(this, 2, 5, 'pCampoAbrevCurso', 'texto') });
+
+    document.getElementById('campoNome').addEventListener("keyup", function () { validarCampos(this, 0, 20, 'pCampoNome', 'texto') });
+    document.getElementById('campoCidade').addEventListener("keyup", function () { validarCampos(this, 0, 30, 'pCampoCidade', 'texto') });
+    document.getElementById('campoSobrenome').addEventListener("keyup", function () { validarCampos(this, 0, 20, 'pCampoSobrenome', 'texto') });
+    document.getElementById('campoBairro').addEventListener("keyup", function () { validarCampos(this, 0, 30, 'pCampoBairro', 'texto') });
+    document.getElementById('campoNomeUsuario').addEventListener("keyup", function () { validarCampos(this, 5, 20, 'pCampoNomeUsuario', 'usuario') });
+    document.getElementById('campoConfirmacao').addEventListener("keyup", function () { validarSenha('campoSenha', this, 'pCampoConfirmacao') });
+
+    document.getElementById('campoArquivo').addEventListener("change", function () { validarArquivo(this, 'pCampoArquivo') })
+});
+
+$('#verSenha').click(function () {
+    var listaCampos = Array.prototype.slice.call(document.getElementsByClassName('senha'));
+
+    listaCampos.forEach(mudar);
+
+    function mudar(item) {
+        if (item.type == "password") {
+            item.type = "text";
+        } else {
+            item.type = "password";
+        }
+    }
+});
+
+function contarCaracteres(obj, i) {
+    var char = obj.value.lenght;
+    document.getElementById("uid").innerHTML = obj.value.lenght;
+
+    if (char < i) {
+        document.getElementById("uid").style.color = "green";
+    } else if (char > i) {
+        document.getElementById("uid").style.color = "red";
+    }
+}
+
+function countChars(obj, tamMin, tamMax, nome) {
+    var maxLength = 20;
+    var strLength = obj.value.length;
+
+    if (strLength > tamMax || strLength < tamMin) {
+        //document.getElementById(nome).innerHTML = '<span style="color: red;">' + strLength + ' out of ' + tamMax + ' characters</span>';
+        document.getElementById(nome).innerHTML = strLength;
+        document.getElementById(nome).style.color = "red";
+    } else {
+        document.getElementById(nome).innerHTML = strLength;
+        document.getElementById(nome).style.color = "black";
+        //document.getElementById(nome).innerHTML = strLength + ' out of ' + tamMax + ' characters';
+    }
+}
+
+//adicionar erro quando é minimo de caracter
+function countCharsNovo(obj, tamMin, tamMax, nome) {
+    var maxLength = 20;
+    var strLength = obj.value.length;
+
+    if (strLength > tamMax || strLength < tamMin) {
+
+        obj.style.border = "2px solid red";
+        obj.title = strLength + " caracteres digitados de " + tamMax + " permitidos."
+
+    } else {
+        obj.style.border = "1px solid #ccc";
+        obj.removeAttribute('title');
+    }
+}
+
+function validarCampos(obj, tamMin, tamMax, campoAviso, tipoCampo) {
+
+    var regex;
+    var aviso;
+    var texto = obj.value;
+    var tamTexto = Object.keys(obj.value).length;
+
+    if (tipoCampo == "texto") {
+        regex = new RegExp("^[A-zÀ-ú\\s]*$");
+        aviso = "Digite apenas letras e espaços";
+    } else if (tipoCampo == "usuario") {
+        regex = new RegExp("^[A-z0-9_.]*$");
+        aviso = "Digite apenas letras, números, pontos(.) e underlines(_)";
+    } else if (tipoCampo == "abreviacao") {
+        regex = new RegExp("^[A-z]*$");
+        aviso = "Digite apenas letras";
+    }
+
+    if (regex.test(texto)) {
+        if (tamTexto < tamMin) {
+            //erro
+            obj.style.border = "2px solid red";
+            document.getElementById(campoAviso).innerHTML = "Digite ao menos " + tamMin + " caracteres";
+
+        } else if (tamTexto > tamMax) {
+            //erro
+            obj.style.border = "2px solid red";
+            document.getElementById(campoAviso).innerHTML = "Limite de " + tamMax + " caracteres atingido";
+
+        } else {
+            obj.style.border = "1px solid #ccc";
+            document.getElementById(campoAviso).innerHTML = "";
+            //tudo certo
+        }
+    } else {
+        obj.style.border = "2px solid red";
+        document.getElementById(campoAviso).innerHTML = aviso;
+        //erro
+    }
+}
+
+function validarSenha(campoSenha, campoConfirmacao, campoAviso) {
+
+    var campoSenha2 = document.getElementById(campoSenha);
+
+    var senha = campoSenha2.value;
+    var confirmacao = campoConfirmacao.value;
+
+    if (senha != confirmacao) {
+        campoConfirmacao.style.border = "2px solid red";
+        document.getElementById(campoAviso).innerHTML = "As senhas não conferem";
+    } else {
+        campoConfirmacao.style.border = "1px solid #ccc";
+        document.getElementById(campoAviso).innerHTML = "";
+    }
+}
+
+function validarArquivo(obj, campoAviso) {
+    var nomeArquivo = obj.value;
+    var extensao = nomeArquivo.substr(nomeArquivo.lastIndexOf('\\') + 1).split('.')[1];
+
+    if (extensao == "pdf" || extensao == "docx") {
+        document.getElementById(campoAviso).innerHTML = "";
+    } else {
+        document.getElementById(campoAviso).innerHTML = "Selecione um documento .docx ou .pdf"; 
+    }
+}

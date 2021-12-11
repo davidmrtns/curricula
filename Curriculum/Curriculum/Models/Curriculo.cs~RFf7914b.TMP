@@ -1,0 +1,333 @@
+﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+
+namespace Curriculum.Models
+{
+    public class Curriculo
+    {
+        //variáveis e código de conexão
+        private string codCurriculo, codAluno, nomeArquivo;
+        private HttpPostedFileBase arquivo;
+        byte[] conteudo;
+        private string codConexao = "Server=localhost; Database=bdcurriculos; User id=root; Password=senaitable123";
+
+        //propriedades
+        public string CodCurriculo { get => codCurriculo; set => codCurriculo = value; }
+        public string CodAluno { get => codAluno; set => codAluno = value; }
+        public string NomeArquivo { get => nomeArquivo; set => nomeArquivo = value; }
+        public HttpPostedFileBase Arquivo { get => arquivo; set => arquivo = value; }
+        public byte[] Conteudo { get => conteudo; set => conteudo = value; }
+
+        //construtores
+        public Curriculo() { }
+        public Curriculo(string codAluno, HttpPostedFileBase arquivo)
+        {
+            CodAluno = codAluno;
+            Arquivo = arquivo;
+        }
+        public Curriculo(string codCurriculo, string codAluno, string nomeArquivo, byte[] conteudo)
+        {
+            CodCurriculo = codCurriculo;
+            CodAluno = codAluno;
+            NomeArquivo = nomeArquivo;
+            Conteudo = conteudo;
+        }
+
+        //método para cadastrar currículos no banco
+        public void inserirCurriculo()
+        {
+            //criação da conexão
+            MySqlConnection con = new MySqlConnection(codConexao);
+
+            //stream
+            byte[] conteudo = null;
+            using (var binaryReader = new BinaryReader(Arquivo.InputStream))
+            {
+                conteudo = binaryReader.ReadBytes(Arquivo.ContentLength);
+            }
+
+                try
+                {
+                    //conexão aberta
+                    con.Open();
+                    //inserindo dados através de parâmetros
+                    MySqlCommand query = new MySqlCommand("INSERT INTO curriculon VALUES (@codCurriculo, @codAluno, @nomeArquivo, @extensao, @conteudo)", con);
+                    query.Parameters.AddWithValue("@codCurriculo", CodCurriculo);
+                    query.Parameters.AddWithValue("@codAluno", CodAluno);
+                    query.Parameters.AddWithValue("@nomeArquivo", Arquivo.FileName);
+                    query.Parameters.AddWithValue("@extensao", Arquivo.ContentType);
+                    query.Parameters.AddWithValue("@conteudo", conteudo);
+
+                    //executando comando
+                    query.ExecuteNonQuery();
+                    //conexão fechada
+                    con.Close();
+                }
+                catch (Exception erro)
+                {
+                    string errado = erro.Message;
+                    //em caso de erro, mostrar caixa com o erro descrito
+                    //MessageBox.Show(new Form { TopMost = true }, "Erro: " + erro.Message);
+                }
+        }
+
+        //método para excluir um currículo cadastrado (usado quando um aluno é apagado)
+        public static void excluirCurriculo(string codAluno)
+        {
+            //criação da conexão
+            MySqlConnection con = new MySqlConnection("Server=localhost; Database=bdcurriculos; User id=root; Password=senaitable123");
+
+            try
+            {
+                //conexão aberta
+                con.Open();
+
+                //apaga da tabela 'curriculo' onde o código do aluno igualar ao informado
+                MySqlCommand query = new MySqlCommand("DELETE FROM curriculon WHERE cod_aluno = @codAluno", con);
+                query.Parameters.AddWithValue("@codAluno", codAluno);
+                //execução do código
+                query.ExecuteNonQuery();
+                //conexão fechada
+                con.Close();
+            }
+            catch (Exception erro)
+            {
+                //em caso de erro, mostrada uma mensagem com o erro descrito
+                //MessageBox.Show("Erro: " + erro.Message);
+            }
+        }
+
+        public Curriculo buscarCurriculo(string codAluno)
+        {
+            MySqlConnection con = new MySqlConnection("Server=localhost; Database=bdcurriculos; User id=root; Password=senaitable123");
+            Curriculo curriculo = null;
+
+            try
+            {
+                con.Open();
+
+                MySqlCommand query = new MySqlCommand("SELECT * FROM curriculon WHERE cod_aluno = @codAluno", con);
+                query.Parameters.AddWithValue("codAluno", codAluno);
+
+                MySqlDataReader leitor = query.ExecuteReader();
+
+                while (leitor.Read())
+                {
+                    CodAluno = codAluno;
+                    CodCurriculo = leitor["cod_curriculo"].ToString();
+
+                    Conteudo = (byte[]) leitor["conteudo_arquivo"];
+                    NomeArquivo = leitor["nome_arquivo"].ToString();
+
+                    curriculo = new Curriculo(CodCurriculo, CodAluno, NomeArquivo, Conteudo);
+                }
+
+                con.Close();
+            }
+            catch
+            {
+                curriculo = null;
+            }
+
+            return curriculo;
+        }
+
+        /*
+
+        //método para buscar caminho do currículo no banco de dados
+        public static string buscarCamCurriculo(string codAluno)
+        {
+            //criação da conexão
+            MySqlConnection con = new MySqlConnection("Server=localhost; Database=bdcurriculos; User id=root; Password=senaitable123");
+
+            //variável do caminho do currículo
+            string camCurriculo = null;
+
+            try
+            {
+                //conexão aberta
+                con.Open();
+
+                //seleciona tudo da tabela 'curriculo' onde o código do aluno for igual ao informado
+                MySqlCommand query = new MySqlCommand("SELECT * FROM curriculo WHERE cod_aluno = @codAluno", con);
+                query.Parameters.AddWithValue("@codAluno", codAluno);
+
+                //criação e execução do leitor
+                MySqlDataReader leitor = query.ExecuteReader();
+
+                //enquanto o leitor puder ler,
+                while (leitor.Read())
+                {
+                    //o caminho do currículo é atribuído à variável
+                    camCurriculo = leitor["caminho_curriculo"].ToString();
+                }
+
+                //conexão fechada
+                con.Close();
+            }
+            catch (Exception erro)
+            {
+                //em caso de erro, o caminho do currículo é nulo e uma mensagem com o erro descrito é mostrada
+                camCurriculo = null;
+                MessageBox.Show("Erro: " + erro.Message);
+            }
+            //retorna o caminho do currículo
+            return camCurriculo;
+        }
+
+        //método que converte o currículo em .txt 
+        public void converterEmTxt(string caminho)
+        {
+            //se o arquivo existir,
+            if (File.Exists(caminho))
+            {
+                //é criada uma variável para o texto que será escrito
+                string texto = string.Empty;
+
+                //se o arquivo for .pdf,
+                if (caminho.EndsWith(".pdf"))
+                {
+                    try
+                    {
+                        //é copiado o arquivo para a pasta do programa, chamando o método moverArquivos()
+                        //esse método também retorna o caminho da pasta para que o .txt possa ser guardado
+                        string caminhoPasta = moverArquivos(caminho, 0);
+
+                        //se o caminho da pasta não for nulo ou vazio,
+                        if (!string.IsNullOrEmpty(caminhoPasta))
+                        {
+                            //é criado um leitor de pdf para ler o arquivo inteiro
+                            PdfReader leitor = new PdfReader(caminho);
+
+                            //enquanto houverem páginas para ler,
+                            for (int pagina = 1; pagina <= leitor.NumberOfPages; pagina++)
+                            {
+                                //o texto da página é extraído e atribuído à variável 's'
+                                ITextExtractionStrategy its = new LocationTextExtractionStrategy();
+                                string s = PdfTextExtractor.GetTextFromPage(leitor, pagina, its);
+                                s = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(s)));
+                                //a variável 'texto' passa a ter valor igual à 's'
+                                texto = texto + s;
+                            }
+                            //encerra-se o leitor após a leitura
+                            leitor.Close();
+                            //é criado um arquivo .txt na mesma pasta onde o .pdf foi armazenado
+                            StreamWriter arquivo = new StreamWriter(caminhoPasta + ".txt");
+                            //o arquivo é escrito e fechado
+                            arquivo.Write(texto);
+                            arquivo.Close();
+
+                            //é chamado o método para cadastrar o currículo no banco de dados
+                            inserirCurriculo();
+                        }
+                    }
+                    catch (Exception erro)
+                    {
+                        //caso haja algum erro, uma caixa com o erro descrito é mostrada
+                        MessageBox.Show(new Form { TopMost = true }, "Erro: " + erro.Message);
+                    }
+                }
+                //caso o arquivo seja .docx,
+                else if (caminho.EndsWith(".docx"))
+                {
+                    try
+                    {
+                        //o método retorna apenas o caminho onde o arquivo será armazenado, sem copiá-lo
+                        string caminhoPasta = moverArquivos(caminho, 1);
+                        //é chamado o método que converte .docx em .pdf, passando os caminhos
+                        //de origem e de destino
+                        if (!string.IsNullOrEmpty(caminhoPasta))
+                        {
+                            wordParaPdf(caminho, caminhoPasta);
+                        }
+                    }
+                    catch (Exception erro)
+                    {
+                        //caso haja algum erro, uma caixa com o erro descrito é mostrada
+                        MessageBox.Show(new Form { TopMost = true }, "Erro: " + erro.Message);
+                    }
+                }
+            }
+        }
+
+        //método que copia arquivos e retorna os caminhos corretos onde serão armazenados
+        private string moverArquivos(string caminhoAtual, int codigo)
+        {
+            //no início, o caminho da pasta é nulo
+            string caminhoPasta = null;
+
+            try
+            {
+                //são obtidos os nomes do arquivo com e sem extensão
+                string nomeArqComExt = System.IO.Path.GetFileName(caminhoAtual);
+                string nomeArqSemExt = System.IO.Path.GetFileNameWithoutExtension(caminhoAtual);
+
+                //mudar caso seja outra pasta de destino quando fizer a instalação
+                //o caminho de destino fica na pasta do programa. Cada aluno possui sua própria
+                //pasta, com seu código no banco de dados e nome 
+                string caminhoDestino = @"C:\Program Files\SAES\Curriculos\" + codAluno + " - " + nomeAluno + @"\";
+
+                //é criado a pasta de destino
+                Directory.CreateDirectory(caminhoDestino);
+
+                //caso o código informado ao método seja 0 (arquivo é .pdf),
+                if (codigo == 0)
+                {
+                    //se não existir o arquivo dentro da pasta,
+                    if (!File.Exists(caminhoDestino + nomeArqComExt))
+                    {
+                        //o arquivo é copiado para esse destino
+                        File.Copy(caminhoAtual, caminhoDestino + nomeArqComExt);
+                    }
+                }
+                //o caminho da pasta é atualizado, consistindo em caminho + nome do arquivo sem extensão
+                caminhoPasta = caminhoDestino + nomeArqSemExt;
+                //dados faltantes para inserção no banco de dados são preenchidos
+                CaminhoArquivo = caminhoPasta + ".pdf";
+                NomeArquivo = nomeArqComExt;
+            }
+            catch (Exception erro)
+            {
+                //em caso de erro, uma caixa de mensagem com a descrição do erro é mostrada
+                MessageBox.Show(new Form { TopMost = true }, "Erro: " + erro.Message);
+            }
+            //por fim, é retornado o caminho da pasta
+            return caminhoPasta;
+        }
+
+        //método que converte .docx em .pdf
+        private void wordParaPdf(string caminhoArquivo, string caminhoPasta)
+        {
+            try
+            {
+                //o documento .docx é aberto em plano de fundo pelo Word
+                Microsoft.Office.Interop.Word.Application appWord = new Microsoft.Office.Interop.Word.Application();
+                Document documento = appWord.Documents.Open(caminhoArquivo);
+
+                //o caminho é criado junto com a extensão do arquivo
+                string caminhoPdf = caminhoPasta + ".pdf";
+
+                //o documento é exportado como .pdf para seu destino
+                documento.ExportAsFixedFormat(caminhoPasta, WdExportFormat.wdExportFormatPDF);
+                //o documento é fechado e o Word encerrado
+                documento.Close();
+                appWord.Quit();
+
+                //é chamado o método converterEmTxt(), passando o caminho do novo .pdf para a operação
+                converterEmTxt(caminhoPdf);
+            }
+            catch (Exception erro)
+            {
+                //caso haja algum erro, uma caixa com o erro descrito é mostrada
+                MessageBox.Show(new Form { TopMost = true }, "Erro: " + erro.Message);
+            }
+        }
+
+        */
+    }
+}
