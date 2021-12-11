@@ -1,12 +1,26 @@
-# Davidmrtns Projetos
+# Projetos
 
+O Curriculum é um projeto Web ASP.NET (.NET Framework 4.6.1) com arquitetura MVC destinado a armazenar currículos e informações de usuários que estejam em busca de emprego. O aplicativo conta com contas de administrador responsáveis por lançar vagas para candidaturas e que têm ao seu alcance todos os currículos cadastrados no site, os quais podem ser localizados através de um sistema de pesquisa completo.
 
+## Instalação
+### Configuração da base de dados
 
-## Getting started
+O Curriculum necessita de um banco de dados interno MySql para funcionar. Para configurar corretamente, siga os passos:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+1. Abra o arquivo [codigos_banco.sql](Curriculum/codigos_banco.sql) e altere a primeira linha para usar a sua base de dados.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+```
+use base-de-dados;
+```
+
+2. Execute o código. Automaticamente será cadastrado um usuário `admin` com a senha `admin`.
+3. Acesse a classe [Conexao.cs](Curriculum/Curriculum/Models/Conexao.cs) e altere o código de conexão para combinar com a base de dados da máquina.
+
+```
+public static readonly string codConexao = "Server=localhost; Database=base-de-dados; User id=seu-user-id; Password=sua-senha";
+```
+
+4. O projeto já está pronto para ser usado.
 
 ## Add your files
 
