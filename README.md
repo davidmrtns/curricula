@@ -1,6 +1,6 @@
-# Projetos
+# Curriculum
 
-### Curriculum
+### Sobre
 O Curriculum é um projeto Web ASP.NET (.NET Framework 4.6.1) com arquitetura MVC destinado a armazenar currículos e informações de usuários que estejam em busca de emprego. O aplicativo conta com contas de administrador responsáveis por lançar vagas para candidaturas e que têm ao seu alcance todos os currículos cadastrados no site, os quais podem ser localizados através de um sistema de pesquisa completo.
 
 ## Instalação
