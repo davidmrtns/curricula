@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Dados do aluno";
+    Curricula.Models.Aluno a = (Curricula.Models.Aluno)TempData["aluno"];
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+    Curricula.Models.Curso c = (Curricula.Models.Curso)TempData["cursoFeito"];
+    Curricula.Models.Curriculo curriculo = (Curricula.Models.Curriculo)TempData["curriculo"];
+}
+@if (a != null && u.Admin == true)
+{
+    <section class="info-aluno">
+        <h2 class="titulo">@a.Nome</h2>
+
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Informações do aluno</h2>
+            <table class="info">
+                <tr>
+                    <td>
+                        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Nome completo:</strong> @a.Nome</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Telefone:</strong> @a.Telefone</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Endereço:</strong> @a.Bairro, @a.CidadeResidencia, @a.Estado - CEP: @a.Cep</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Data de nascimento:</strong> @a.DataNascimento.ToString("d")</p>
+                    </td>
+                </tr>
+                @if (c != null)
+                {
+                    <tr>
+                        <td>
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <p><strong>Curso realizado:</strong> @c.NomeCurso (@c.AbrevCurso)</p>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <p><strong>Curso realizado:</strong> Nenhum curso foi encontrado nesse perfil</p>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Currículo</h2>
+
+            @if (curriculo != null)
+            {
+                if (a.Empregavel)
+                {
+                    <h3 class="curriculo">@curriculo.NomeArquivo <a href="~/Home/BaixarCurriculo/@a.CodAluno">Baixar currículo</a></h3>
+                }
+                else
+                {
+                    <h3 class="curriculo">@curriculo.NomeArquivo</h3>
+                    <p class="aviso">Atualmente, este perfil não está aberto a contratações.</p>
+                }
+            }
+            else
+            {
+                <h3 class="curriculo">Nenhum currículo foi encontrado neste perfil.</h3>
+            }
+        </div>
+
+        <div class="centro descricao">
+            <h2 class="subtitulo texto-esquerda">Palavras-chave</h2>
+
+            @if (a.PalavrasChave.Length > 0)
+            {
+                <p>@a.PalavrasChave</p>
+            }
+            else
+            {
+                <p class="aviso">Esse perfil não possui palavras-chave.</p>
+            }
+        </div>
+    </section>
+}
+else
+{
+    <div class="erro">
+        <h2 class="titulo">Nada para mostrar aqui :(</h2>
+    </div>
+}
+

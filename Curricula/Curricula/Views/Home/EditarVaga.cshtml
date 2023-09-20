@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Editar vaga";
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+    Curricula.Models.Vaga v = (Curricula.Models.Vaga)TempData["vaga"];
+    List<Curricula.Models.Curso> listaCursos = (List<Curricula.Models.Curso>)TempData["cursos"];
+
+    Curricula.Models.Itens i = new Curricula.Models.Itens();
+    var estados = i.Estados;
+    var cursos = i.cursos(listaCursos);
+}
+
+@if (u != null && u.Admin && v != null)
+{
+    <section class="cadastro">
+        <div class="centro cadastrar">
+            <br />
+            <form method="post">
+                <div class="centro">
+                    <h2 class="titulo">Editar vaga</h2>
+                    <input type="hidden" name="codigoVaga" value="@v.CodVaga" />
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Empresa contratante:</h2>
+                    <input type="text" placeholder="Nome da empresa" name="nomeEmpresa" id="campoNomeEmpresa" value="@v.NomeEmpresa" />
+                    <p id="pCampoNomeEmpresa"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Nome da vaga:</h2>
+                    <input type="text" placeholder="Nome da vaga" name="nomeVaga" id="campoNomeVaga" value="@v.NomeVaga" />
+                    <p id="pCampoNomeVaga"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Cidade:</h2>
+                    <input type="text" placeholder="Cidade" name="cidade" id="campoCidade" value="@v.Cidade" />
+                    <p id="pCampoCidade"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Estado:</h2>
+                    @Html.DropDownList("estado", new SelectList(estados, "Value", "Text", Array.Find(estados, item => item.Value == v.Estado).Value), new { @id = "campoEstado" })
+                    <p id="pCampoEstado"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Descrição:</h2>
+                    <textarea name="descricao" id="campoDescricao">@v.Descricao</textarea>
+                    <p id="pCampoDescricao"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Curso relacionado:</h2>
+                    @Html.DropDownList("cursoRelacionado", new SelectList(cursos, "Value", "Text", Array.Find(cursos, item => item.Value == v.AbrevCurso).Value), new { @id = "campoCurso" })
+                    <p id="pCampoCurso"></p>
+                    <p class="aviso">Mudar o curso removerá todas as candidaturas feitas nessa vaga.</p>
+                </div>
+
+                <div class="centro">
+                    <input type="button" class="cancelar" value="Cancelar" onclick="window.location.href = '/Home/VerVaga/@v.CodVaga'" />
+                    <input class="botao-cliente" type="submit" value="Salvar" />
+                </div>
+            </form>
+            <br />
+        </div>
+    </section>
+}
+else
+{
+    <div class="erro">
+        <h2 class="titulo">Nada para mostrar aqui :(</h2>
+    </div>
+}

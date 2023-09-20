@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Cadastrar curso";
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+    List<Curricula.Models.Curso> lista = (List<Curricula.Models.Curso>) TempData["listaCursos"];
+}
+
+@if (u != null && u.Admin == true)
+{
+    <section class="cadastro">
+        <div class="centro cadastrar">
+            <br />
+            <form method="post">
+                <div class="centro">
+                    <h2 class="titulo">Cadastrar curso</h2>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Nome do curso:</h2>
+                    <input type="text" placeholder="Nome do curso" name="nomeCurso" id="campoNomeCurso" />
+                    <p id="pCampoNomeCurso"></p>
+                </div>
+
+                <div class="centro">
+                    <h2 class="rotulo">Abreviação do curso:</h2>
+                    <input type="text" placeholder="Abreviação" name="abrevCurso" id="campoAbrevCurso" />
+                    <p id="pCampoAbrevCurso"></p>
+                </div>
+
+                <div class="centro">
+                    <input type="submit" value="Cadastrar" />
+                </div>
+            </form>
+            <br />
+        </div>
+
+        <div class="centro resultados">
+            <p><a href="~/Home/ListarCursos">Ver cursos cadastrados</a></p>
+
+            @if (lista != null)
+            {
+                <ul>
+                    @foreach (Curriculum.Models.Curso c in lista)
+                    {
+                        <li><span>@c.NomeCurso (@c.AbrevCurso) <a href="~/Home/ExcluirCurso/@c.AbrevCurso" class="remover excluirCurso"><i class="fa fa-trash" aria-hidden="true"></i> Apagar curso</a></span></li>
+                    }
+                </ul>
+            }
+        </div>
+    </section>
+}
+else
+{
+    <div class="erro">
+        <h2 class="titulo">Nada para mostrar aqui :(</h2>
+    </div>
+}

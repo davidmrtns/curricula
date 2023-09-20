@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+@{
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Curricula</title>
+    <link runat="server" rel="shortcut icon" href="~/Content/Imagens/curricula-logo.svg" type="image/x-icon" />
+    <link runat="server" rel="icon" href="~/Content/Imagens/curricula-logo.svg" type="image/ico" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/estilo.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <header>
+        <div class="centro">
+            <div class="esquerda">
+                <a class="logomarca" href="/">
+                    <div>
+                        <svg class="logo" viewBox="0 0 361 394" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M180.693 0L361 95L313.723 297.75L180.693 394L47.6644 297.75L0 95L180.693 0ZM233.383 133C233.383 160.614 209.568 183 180.191 183C150.815 183 127 160.614 127 133C127 105.386 150.815 83 180.191 83C209.568 83 233.383 105.386 233.383 133ZM297.476 275V253.824C270.193 219.224 227.82 197 180.238 197C132.656 197 90.2825 219.224 63 253.824V275H297.476Z" fill="white" />
+                        </svg>
+                        <p>Curricula</p>
+                    </div>   
+                </a>
+            </div>
+
+            <nav class="desktop direita">
+                @if (u != null && u.Admin == true)
+                {
+                    <a class="secao" href="~/Home/PesquisarAlunos"><i class="fa fa-search icones" aria-hidden="true"></i></a>
+                }
+
+                <a href="~/Home/Conta"><i class="fa fa-user-circle-o icones" aria-hidden="true"></i></a>
+
+                @if (u != null)
+                {
+                    <a class="secao" href="~/Home/Desconectar">Sair</a>
+                }
+            </nav>
+
+            <nav class="mobile direita">
+                <div class="botao-mobile">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <ul>
+                    <li><a href="~/Home/Conta">Conta</a></li>
+
+                    @if (u != null && u.Admin == true)
+                    {
+                        <li><a href="~/Home/PesquisarAlunos">Pesquisar alunos</a></li>
+                    }
+
+                    @if (u != null)
+                    {
+                        <li><a href="~/Home/Desconectar">Sair</a></li>
+                    }
+                </ul>
+            </nav>
+            <div class="limpar"></div>
+        </div>
+    </header>
+
+    <main class="margem-body">
+        @RenderBody()
+    </main>
+
+    @if (TempData["msg"] != null)
+    {
+        <script>
+            document.onreadystatechange = () => {
+                if (document.readyState === 'complete') {
+                    alert('@Html.Raw(TempData["msg"])');
+                }
+            };
+        </script>
+    }
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/inputmask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+</body>
+</html>

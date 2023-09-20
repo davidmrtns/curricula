@@ -1,0 +1,1005 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,500;1,300;1,400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;  
+}
+
+html, body{
+    height: 100%;
+}
+
+nav.mobile{
+    display: none;
+}
+
+.botao-mobile{
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    margin-right: 10px;
+}
+
+div.detalhes img {
+    max-width: 350px;
+}
+
+div.dados-usuario img{
+    width: 100%;
+    max-width: 150px;
+}
+
+div.dados-usuario div{
+    width: max-content;
+}
+
+div.dados-usuario h3{
+    margin-left: 10px;
+}
+
+div.dados-usuario h3.ocupacao{
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+}
+
+div.dados-usuario h3.nome-usuario{
+    font-size: 35px;
+    color: #071e61;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+div.login form p{
+    margin-top: 16px;
+}
+
+li{
+    list-style-type: disc;
+    list-style-position: inside;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+li span{
+    position: relative;
+    left: -8px;
+}
+
+span a{
+    margin-left: 10px;
+}
+
+a.remover{
+    color: #ff454d !important;
+}
+
+div.descricao p{
+    text-align: justify;
+}
+
+div.descricao{
+    /*max-width: 50%;*/
+    margin: 0;
+}
+
+h2#mudarSenha{
+    cursor: pointer;
+    color: #b8860b;
+}
+
+h2#mudarSenha:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+div.resultados ul{
+    text-align: center;
+}
+
+.margem-body{
+    margin-top: 11px;
+}
+
+footer {
+    bottom: 0;
+    left: 0;
+    background: #1b1332;
+    padding: 20px 0;
+    position: inherit;
+    width: 100%;
+}
+
+section.entrar{
+    height: 100vh;
+    background: #5E548E;
+}
+
+footer p {
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0;
+    padding-bottom: 0;
+}
+
+.divisao-rb{
+    width: 20%;
+    padding: 0 10px;
+}
+
+nav.desktop .secao {
+    font-size: 22px;
+    color: white;
+    margin-left: 6px;
+}
+
+h2.rotulo {
+    color: black;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+h2.titulo {
+    font-family: 'Kanit', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 0;
+    color: #22223b;
+}
+
+div.painel-admin h2.titulo, section.info-aluno h2.titulo, div.erro h2.titulo{
+    color: white;
+}
+
+.logomarca{
+    font-family: 'Kanit', sans-serif;
+    font-weight: lighter;
+}
+
+.logomarca div{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.logomarca div p{
+    text-decoration: none;
+    font-size: 32px;
+    color: white;
+    font-style: italic;
+    padding-bottom: 0;
+    margin-left: 3px;
+}
+
+section.cadastro.aluno h3.curriculo a, div.vagas a{
+    color: #433a88;
+}
+
+a .icones {
+    margin-top: 5px;
+    margin-right: 2.5px;
+    margin-left: 10px;
+    color: white;
+    font-size: 34px;
+}
+
+div.links p{
+    text-align: left;
+}
+
+svg.logo{
+    width: 40px;
+}
+
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: #342a61;
+    padding: 8px 0;
+}
+
+nav.desktop ul {
+    list-style-type: none;
+    position: relative;
+    top: 36px;
+}
+
+nav.desktop li {
+    font-weight: 300;
+    font-size: 15px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+nav.desktop a {
+    color: #7A7A7A;
+    text-decoration: none;
+}
+
+nav.desktop i:hover, div.esquerda a:hover, a.secao:hover {
+    transition: 1s;
+    color: #8b6fa3;
+}
+
+a.logomarca:hover svg.logo path, a.logomarca:hover p{
+    transition: 1s;
+    fill: #8b6fa3;
+    color: #8b6fa3;
+}
+
+input[type=submit]:hover{
+    transition: 1s;
+    background: #be95c4;
+}
+
+input[type="button"].cancelar:hover{
+    transition: 1s;
+    background: #f15b5b;
+}
+
+a:hover{
+    transition: 1s;
+    color: rgb(192, 173, 248);
+}
+
+a.remover:hover{
+    color: rgba(196, 18, 18, 1);
+}
+
+ul{
+    list-style-type: none;
+}
+
+.imagem{
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.icone{
+    width: 70%;
+    margin-left: 35px;
+    margin-top: 35px;
+    max-width: 148px;
+}
+
+p{
+    text-align: center;
+}
+
+table{
+    margin-bottom: 25px;
+    border: 0;
+    font-size: 25px;
+    text-align: center;
+}
+
+table.info td.celula-titulo{
+    font-weight: bold;
+    padding-right: 50px;
+}
+
+table td{
+    font-size: 17px;
+    padding: 0 5px;
+}
+
+table td p{
+    margin-top: 0;
+    padding-bottom: 0;
+    text-align: left;
+}
+
+h3{
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+h3.curriculo{
+    font-weight: bold;
+}
+
+h2.subtitulo.texto-esquerda{
+    text-align: left;
+}
+
+div.detalhes h3, div.info-conta h3{
+    font-weight: bold;
+}
+
+.subtitulo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    text-align: center;
+    color: #c7b7ca;
+    font-size: 27px;
+}
+
+div.menu-lateral{
+    width: 25%;
+    background: #302a4c;
+    float: left;
+    color: white;
+    padding: 14px;
+    min-height: 100vh;
+}
+
+div.menu-lateral div.user-data{
+    margin-bottom: 30px;
+}
+
+div.menu-lateral div.info-user div.seta-colapsar{
+    display: none;
+}
+
+div.seta-colapsar{
+    text-align: center;
+}
+
+div.menu-lateral h3.nome-usuario{
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+div.menu-lateral h3.ocupacao{
+    text-align: center;
+    font-size: 17px;
+    font-style: italic;
+    color: #ffffff80;
+}
+
+div.menu-lateral p{
+    text-align: left;
+    color: #ffffff80;
+    font-size: 12px;
+}
+
+div.menu-lateral h4{
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+div.menu-lateral div.nome-acoes{
+    display: flex;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+
+div.menu-lateral div.acoes{
+    display: flex;
+    margin-left: 5px;
+    padding-top: 10px;
+}
+
+div.menu-lateral div.acoes a{
+    margin-right: 6px;
+}
+
+div.menu-lateral div.ocurriculo{
+    border-top: 1px solid #ffffff80;
+    margin: 8px 0;
+}
+
+div.menu-lateral div.ocurriculo h3{
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+div.menu-lateral div.ocurriculo p{
+    color: white;
+    margin-top: -5px;
+}
+
+div.menu-lateral div.ocurriculo p.curriculo span{
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+div.painel-admin div.caixa-acao{
+    background: #171430;
+    width: 256px;
+    padding: 20px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+div.painel-admin div.caixa-acao:hover{
+    transition: 1s;
+    background: #403a71;
+}
+
+div.painel-admin div.caixa-acao a{
+    color: white !important;
+}
+
+div.painel-admin div.caixa-acao p{
+    padding-bottom: 0 !important;
+}
+
+div.painel-admin div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div.vagas{
+    padding: 15px;
+    text-align: center;
+    width: 75%;
+    background: #5e548e;
+    float: left;
+    min-height: 100vh;
+    color: white;
+}
+
+div.vagas a, .info-vaga a{
+    color: #c7baff;
+}
+
+div.vagas a.remover{
+    color: white;
+}
+
+div.vagas h3{
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 19px;
+    margin-bottom: 3px;
+}
+
+div.vagas p.dica-subtitulo{
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(256, 256, 256, 0.68);
+}
+
+div.vagas ul{
+    margin-top: 20px;
+}
+
+div.vagas ul li span, div.vagas ul li span a{
+    font-size: 12px;
+}
+
+div.vagas div.candidaturas{
+    margin-top: 44px;
+}
+
+div.vagas div.candidaturas p.dica, div.vagas div.vagas-disponiveis p.dica{
+    font-style: inherit;
+    color: #c7baff;
+    margin-top: 24px;
+}
+
+section.info-vaga, section.cadastro, section.pesquisar, section.info-aluno, div.painel-admin, div.erro{
+    min-height: 100vh;
+    background: #5e548e;
+    padding: 20px 0;
+    color: white;
+}
+
+section.pesquisar h2.titulo, section.pesquisar a, section.info-vaga h2.titulo{
+    color: white;
+}
+
+section.info-vaga p{
+    text-align: left;
+}
+
+p.aviso{
+    font-size: 17px;  
+    text-align: left;
+}
+
+.botao-cliente{
+    margin-top: 45px;
+}
+
+form input[type=text], input[type=password], input[type=date], input[type=button], select, textarea{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 5px;
+    background: white;
+    color: #333;
+    font-size: 15px;
+    padding-left: 10px;
+    border: 1px solid #CCC;
+    outline: 0;
+}
+
+form textarea{
+    resize: none;
+    height: 150px;
+    padding: 8px;
+}
+
+input[type=file]{
+    display: none;
+}
+
+input[type=button].cancelar{
+    margin-top: 15px;
+    color: white;
+    background: #fb0e0e;
+    border: 0;
+}
+
+div.cadastrar input[type=text], div.cadastrar input[type=password], div.cadastrar input[type=date], 
+div.cadastrar input[type=button], div.cadastrar input[type="submit"], div.cadastrar select, div.cadastrar textarea{
+    max-width: 670px;
+}
+
+div.cadastrar h2.rotulo{
+    text-align: left;
+}
+
+div.pesquisar{
+    margin-bottom: 18px;
+}
+
+div.pesquisar div.filtros{
+    background: white;
+    border-radius: 8px;
+}
+
+div.pesquisar div{
+    padding: 0 1%;
+    margin-top: 12px;
+}
+
+div.pesquisar input[type=text], div.pesquisar input[type=button]{
+    border: 0;
+    padding-right: 10px;
+    border-right: 1px solid #CCC;
+}
+
+div.pesquisar select{
+    border: 0;
+}
+
+div.pesquisar input[type=submit]{
+    border-radius: 12px;
+    max-width: 150px;
+}
+
+i#verSenha{
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+i#duvidaPalavrasChave{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+div.cadastrar{
+    max-width: 720px;
+    border-radius: 9px;
+    background-color: #fcf9f5;
+    margin-bottom: 35px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 5px 40px, rgba(0, 0, 0, 0.1) 0 5px 10px;
+}
+
+div.login{
+    max-width: 450px;
+    max-height: 365px;
+    background-color: #fcf9f5;
+    margin-bottom: 35px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 5px 40px, rgba(0, 0, 0, 0.1) 0 5px 10px;
+    transform: translateY(15vh);
+}
+
+div.login input[type=text], div.login input[type=password]{
+    max-width: 340px;
+    border-bottom-style: groove;
+    border-width: 0px 0px 1px 0px;
+    border-bottom-color: #5b3484;
+    background: transparent;
+    padding-left: 0;
+    margin-bottom: 12px;
+}
+
+div.login input[type=submit]{
+    margin-top: 25px;
+}
+
+div.cadastrar div{
+    width: 100%;
+}
+
+.botao-login {
+    margin-top: 20px;
+}
+
+form input[type=submit]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9px;
+    height: 50px;
+    background: #46337f;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    border: 0;
+    width: 100%;
+}
+
+.divisao2{
+    padding: 0 10px;
+    width: 50%;
+}
+
+.divisao3{
+    width: 33.3%;
+    padding: 0 10px;
+}
+
+.divisao5{
+    width: 20%;
+    padding: 0 10px;
+}
+
+.esquerda{
+    float: left;
+}
+
+.direita{
+    float: right;
+}
+
+.limpar{
+    clear: both;
+}
+
+.centro{
+    padding: 0 3%;
+    margin:0 auto;
+}
+
+form div.centro{
+    padding: 0 1%;
+}
+
+.alinhar{
+    width: 93%;
+    max-width: 500px;
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform:translate(-50%,-50%);
+    text-align: center;
+}
+
+.alinhar h2{
+    color: white;
+    font-size: 60px;
+    font-family: 'Kanit', sans-serif;
+    margin-bottom: 0;
+}
+
+.alinhar p.slogan {
+    font-size: 18px;
+    color: white;
+}
+
+.resultados ul li{
+    color: white;
+}
+
+.resultados ul li a, section.info-aluno a{
+    color: #d7caff;
+}
+
+/*Site*/
+
+section.banner{
+    width: 100%;
+    height: 350px;
+    background-image: url(../Content/Imagens/banner.png);
+    background-size: cover;
+    position: relative;
+}
+
+section.banner .sobreposicao{
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(51,51,51,0.4);
+}
+
+section.descricao{
+    padding: 40px 0;
+    background: #282828;
+}
+
+section.descricao h2{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    margin-top: 0;
+}
+
+section.descricao p{
+    text-align: justify;
+    font-size: 17px;
+    margin-top: 10px;
+    color: white;
+}
+
+section.descricao a{
+    color: #a892d7;
+}
+
+a{
+    color: #7a5fc9;
+}
+
+section.candidatar ul li{
+    color: black;
+}
+
+section.cadastro p a{
+    color: white;
+    font-weight: bold;
+}
+
+section.cadastro p.aviso{
+    text-align: center;
+}
+
+section.cadastro ul{
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    margin-top: 16px;
+}
+
+section.cadastro div.cadastrar p{
+    color: black;
+}
+
+section.pesquisar div.resultados ul{
+    margin-top: 16px;
+}
+
+@media only screen and (max-device-width: 1055px), (max-width: 1055px){
+    div.painel-admin div{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    div.painel-admin div div.caixa-acao{
+        margin-bottom: 5px;
+    }
+}
+
+@media only screen and (max-device-width: 960px), (max-width: 960px){
+    .divisao2{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    section.descricao .imagem{
+        width: 70%;
+    }
+    
+    section.pesquisar .divisao5{
+        width: 100%;
+        height: 50px;
+        margin-top: 10px;
+    }
+    
+    section.pesquisar form input[type="text"]{
+        max-width: 450px;
+        border-right: 0;
+        border-bottom: 1px solid #CCC;
+    }
+
+    section.pesquisar form select{
+        max-width: 450px;
+    }
+    
+    section.pesquisar div.filtros{
+        max-width: 500px;
+    }
+}
+
+@media only screen and (max-device-width: 847px), (max-width: 847px){
+    div.menu-lateral h3.nome-usuario{
+        font-size: 24px;
+    }
+
+    div.menu-lateral div.acoes{
+        padding-top: 3px;
+    }
+
+    div.menu-lateral div.user-data {
+        margin-bottom: 0;
+        margin-top: 2px;
+    }
+}
+
+@media only screen and (max-device-width: 768px), (max-width: 768px){
+    nav.desktop{
+        display: none;
+    }
+
+    nav.mobile{
+        display: block;
+    }
+
+    nav.mobile ul{
+        top: 62px;
+        z-index: 3;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        display: none;
+        text-align: center;
+    }
+
+    nav.mobile li{
+        font-weight: 300;
+        width: 100%;
+        display: block;
+        background: #9287c9;
+        border-bottom: 1px solid #3f3667;
+        font-size: 17px;
+        padding: 8px 0;
+        margin-top: -1px;
+        margin-bottom: 0;
+    }
+
+    nav.mobile li a{
+        display: block;
+        color: white;
+        text-decoration: none;
+    }
+
+    section.descricao .imagem{
+        width: 100%;
+    }
+
+    section.info-usuario div.acoes{
+        display: none;
+    }
+
+    section.info-usuario div.menu-lateral{
+        width: 100%;
+        min-height: 0;
+        height: 86px;
+    }
+
+    div.menu-lateral div.info-user div.seta-colapsar{
+        display: block;
+    }
+
+    div.menu-lateral h3.ocupacao{
+        margin-top: 8px;
+        margin-bottom: 1px;
+    }
+
+    div.vagas{
+        width: 100%;
+    }
+
+    section.entrar div.login, section.cadastro div.cadastrar{
+        transform: none;
+        background: none;
+        box-shadow: none;
+        margin-top: 0;
+        max-width: 500px;
+        margin-bottom: 0;
+    }
+
+    div.dados-usuario{
+        display: flex;
+        justify-content: center;
+    }
+
+    section.cadastro .resultados ul li a, section.info-aluno a{
+        color: #3f3667;
+    }
+    
+    section.cadastro p a{
+        color: #875abc;
+    }
+    
+    section.entrar form input[type="text"], section.entrar form input[type="password"], section.cadastro form input[type="text"], section.cadastro form input[type="password"]
+    section.cadastro form input[type="date"], section.cadastro form select
+    {
+        max-width: 450px;
+    }
+
+    section.entrar, section.cadastro{
+        min-height: 100vh;
+        background: #fcf9f5;
+    }
+
+    h2.subtitulo{
+        font-size: 21px;
+        margin-top: 25px;
+        text-align: center !important;
+    }
+
+    div.descricao{
+        max-width: 100%;
+    }
+
+    div.links p, div.descricao p, h3.curriculo, section.info-vaga p.aviso{
+        text-align: center;
+    }
+
+    p.aviso, section.info-usuario h3.curriculo, section.info-vaga h3.curriculo{
+        font-size: 17px;
+        text-align: center;
+    }
+
+    p.aviso a, section.info-usuario h3.curriculo a, section.info-vaga h3.curriculo a{
+        font-size: 15px;
+    }
+
+    ul li{
+        text-align: center;
+        margin-top: 12px;
+    }
+    
+    section.cadastro div.resultados ul li{
+        color: black;
+    }
+
+    table{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    table.info td{
+        font-size: 15px;
+    }
+
+    table.info td.celula-titulo{
+        text-align: right;
+        padding-right: 16px;
+    }
+
+    div.esquerda a.logomarca, nav.desktop a.secao{
+        font-size: 20px;
+    }
+
+    nav.desktop a i{
+        font-size: 26px;
+    }
+
+    body{
+        padding-top: 40px;
+    }
+}
+
+@media only screen and (max-device-width: 700px), (max-width: 700px){
+    section.descricao p{
+        font-size: 16px;
+    }
+}

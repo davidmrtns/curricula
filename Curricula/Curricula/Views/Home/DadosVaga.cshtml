@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Dados da vaga";
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+    Curricula.Models.Aluno aluno = (Curricula.Models.Aluno)TempData["aluno"];
+    Curricula.Models.Vaga v = (Curricula.Models.Vaga)TempData["vaga"];
+    Curricula.Models.Curso curso = (Curricula.Models.Curso)TempData["curso"];
+    Curricula.Models.Curso cursoFeito = (Curricula.Models.Curso)TempData["cursoFeito"];
+    List<Curricula.Models.Aluno> listaCandidatos = (List<Curricula.Models.Aluno>)TempData["listaCandidatos"];
+    bool seCandidatou = TempData["seCandidatou"] as bool? ?? false;
+}
+
+@if (u != null && v != null)
+{
+    <section class="info-vaga">
+        <h2 class="titulo">@v.NomeVaga</h2>
+
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Dados da vaga</h2>
+            <table class="info">
+                <tr>
+                    <td>
+                        <i class="fa fa-building" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Empresa:</strong> @v.NomeEmpresa</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Localização:</strong> @v.Cidade - @v.Estado</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p><strong>Curso relacionado:</strong> @curso.NomeCurso (@curso.AbrevCurso)</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="descricao">
+                <h2 class="subtitulo texto-esquerda">Descrição da vaga</h2>
+                <p>@v.Descricao</p>
+            </div>
+        </div>
+
+    @if (aluno != null && cursoFeito.AbrevCurso == curso.AbrevCurso)
+    {
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Candidatura</h2>
+
+            @if (seCandidatou == false)
+            {
+                <a href="~/Home/Candidatar/@v.CodVaga">Candidatar-se</a>
+            }
+            else if (seCandidatou == true)
+            {
+                <p>Você se candidatou à essa vaga. <a href="~/Home/RemoverCandidatura/@v.CodVaga" class="remover">Remover candidatura</a></p>
+            }
+        </div>
+    }
+    else if (u.Admin == true)
+    {
+        <div class="centro">
+            <h2 class="subtitulo texto-esquerda">Lista de candidatos</h2>
+
+            @if (listaCandidatos.Count > 0)
+            {
+                <ul>
+                    @foreach (Curricula.Models.Aluno a in listaCandidatos)
+                    {
+                        <li><span>@a.CodAluno - @a.Nome - @a.CidadeResidencia <a href="~/Home/VerAluno/@a.CodAluno" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver perfil</a> <a href="~/Home/BaixarCurriculo/@a.CodAluno"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Baixar currículo</a></span></li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="aviso">Nenhum aluno se candidatou para essa vaga.</p>
+            }
+        </div>
+
+        <div class="centro links">
+            <h2 class="subtitulo texto-esquerda">Ações</h2>
+
+            <p><a href="~/Home/EditarVaga/@v.CodVaga"><i class="fa fa-pencil" aria-hidden="true"></i> Editar vaga</a></p>
+            <p><a href="~/Home/ExcluirVaga/@v.CodVaga" class="remover excluirVaga"><i class="fa fa-trash" aria-hidden="true"></i> Excluir vaga</a></p>
+        </div>
+    }
+    </section>
+}
+else
+{
+    <div class="erro">
+        <h2 class="titulo">Nada para mostrar aqui :(</h2>
+    </div>
+}

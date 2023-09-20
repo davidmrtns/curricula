@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewBag.Title = "Conta";
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+    Curricula.Models.Aluno a = (Curricula.Models.Aluno)TempData["aluno"];
+    Curricula.Models.Curso c = (Curricula.Models.Curso)TempData["cursoFeito"];
+    Curricula.Models.Curriculo curriculo = (Curricula.Models.Curriculo)TempData["curriculo"];
+    List<Curricula.Models.Vaga> vagasCandidatadas = (List<Curricula.Models.Vaga>)TempData["vagasCandidatadas"];
+    List<Curricula.Models.Vaga> lista = (List<Curricula.Models.Vaga>)TempData["listaVagas"];
+}
+@if (u == null)
+{
+    <section class="entrar">
+        <div class="centro login">
+        <br />
+            <form method="post">
+                <div class="centro">
+                    <h2 class="titulo">Entrar</h2>
+                </div>
+                <div class="centro">
+                    <input type="text" placeholder="Nome de usuário" name="nomeUsuario" />
+                </div>
+                <div class="centro">
+                    <input type="password" placeholder="Senha" name="senha" class="senha" />
+                    <i class="fa fa-eye" aria-hidden="true" id="verSenha"></i>
+                    <div class="limpar"></div>
+                </div>
+                <div class="centro">
+                    <input type="submit" value="Login" />
+                </div>
+                <div class="centro">
+                    <p>Não tem uma conta? <a href="~/Home/CadastrarAluno">Cadastre-se aqui</a></p>
+                </div>
+            </form>
+        <br />
+        </div>
+    </section>
+}
+else if (u != null)
+{
+<section class="info-usuario">
+    @if (a != null)
+    {
+        <div class="menu-lateral">
+            <div class="info-user">
+                <div class="user-data">
+                    <div>
+                        <div class="nome-acoes">
+                            <h3 class="nome-usuario">@u.NomeUsuario</h3>
+                            <div class="acoes">
+                                <p><a href="~/Home/EditarDados"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                                <p><a href="~/Home/ExcluirUsuario/@u.NomeUsuario" class="remover excluirUsuario"><i class="fa fa-user-times" aria-hidden="true"></i></a></p>
+                            </div>
+                        </div>
+                        @if (u.Admin == false)
+                        {
+                            <h3 class="ocupacao">Aluno</h3>
+                        }
+                        else
+                        {
+                            <h3 class="ocupacao">Administrador</h3>
+                        }
+                    </div>
+                </div>
+                <div id="menu-colapsar">
+                    <div>
+                        <div>
+                            <h4>@a.Nome</h4>
+                            <p>Nome</p>
+                        </div>
+                        <div>
+                            <h4>@a.Telefone</h4>
+                            <p>Telefone</p>
+                        </div>
+                        <div>
+                            <h4>@a.Bairro, @a.CidadeResidencia - @a.Estado</h4>
+                            <p>Endereço</p>
+                        </div>
+                        <div>
+                            <h4>@a.Cep</h4>
+                            <p>CEP</p>
+                        </div>
+                        <div>
+                            <h4>@a.DataNascimento.ToString("d")</h4>
+                            <p>Data de nascimento</p>
+                        </div>
+                        <div>
+                            @if (c != null)
+                            {
+                                <h4>@c.NomeCurso (@c.AbrevCurso)</h4>
+                            }
+                            else
+                            {
+                                <h4>Nenhum curso encontrado em seu perfil. <a href="~/Home/EditarDados">Adicionar curso</a></h4>
+                            }
+                            <p>Curso realizado</p>
+                        </div>
+                        <div>
+                            @if (a.PalavrasChave.Length > 0)
+                            {
+                                <h4>@a.PalavrasChave</h4>
+                            }
+                            else
+                            {
+                                <h4>Seu perfil não possui palavras-chave. <a href="~/Home/EditarDados">Adicionar palavras-chave</a></h4>
+                            }
+                            <p>Palavras-chave</p>
+                        </div>
+                    </div>
+                    <div class="ocurriculo">
+                        <h3>Currículo</h3>
+                        <div>
+                            @if (curriculo != null)
+                            {
+                                <p class="curriculo"><span>@curriculo.NomeArquivo</span> <a href="~/Home/BaixarCurriculo/@a.CodAluno"><i class="fa fa-cloud-download" aria-hidden="true"></i></a> <a href="~/Home/ExcluirCurriculo/@a.CodAluno" class="remover excluirCurriculo"><i class="fa fa-trash" aria-hidden="true"></i></a></p>
+
+                                if (a.Empregavel)
+                                {
+                                    <p>Aparecer nas vagas <a href="~/Home/MudarEmpregavel/@a.CodAluno"><i class="fa fa-toggle-on" aria-hidden="true"></i></a></p>
+                                }
+                                else
+                                {
+                                    <p>Aparecer nas vagas <a href="~/Home/MudarEmpregavel/@a.CodAluno"><i class="fa fa-toggle-off" aria-hidden="true"></i></a></p>
+                                }
+                            }
+                            else
+                            {
+                                <h3 class="curriculo">Nenhum currículo foi encontrado em seu perfil. <a href="~/Home/EditarDados"><i class="fa fa-plus" aria-hidden="true"></i></a></h3>
+                                <p>Adicione um currículo para aparecer nas indicações de vagas.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="seta-colapsar">
+                    <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        <div class="vagas">
+            <div class="vagas-disponiveis">
+                <div>
+                    <h3>Vagas</h3>
+                </div>
+                <div>
+                    @if (lista != null)
+                    {
+                        <p class="dica-subtitulo">Mostrando vagas com base em seu curso</p>
+                        <ul>
+                            @foreach (Curricula.Models.Vaga v in lista)
+                            {
+                                if (vagasCandidatadas != null && !vagasCandidatadas.Any(vaga => vaga.CodVaga == v.CodVaga))
+                                {
+                                    <li><span>@v.NomeVaga - @v.NomeEmpresa <a href="~/Home/VerVaga/@v.CodVaga" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver vaga</a><a href="~/Home/Candidatar/@v.CodVaga"><i class="fa fa-paper-plane" aria-hidden="true"></i> Candidatar-se</a></span></li>
+                                }
+                            }
+                        </ul>
+                    }
+                    else if (lista == null || lista.Count == 0)
+                    {
+                        <p class="dica">Não há nenhuma vaga disponível no momento</p>
+                    }
+                    else if (a.Empregavel == false)
+                    {
+                        <p class="dica">Você deve ser empregável para poder se candidatar a uma vaga</p>
+                    }
+                </div>
+            </div>
+            <div class="candidaturas">
+                <div>
+                    <h3>Candidaturas</h3>
+                </div>
+                <div>
+                    @if (vagasCandidatadas != null && vagasCandidatadas.Count > 0)
+                    {
+                        <ul>
+                            @foreach (Curricula.Models.Vaga v in vagasCandidatadas)
+                            {
+                                <li><span>@v.NomeVaga - @v.NomeEmpresa <a href="~/Home/VerVaga/@v.CodVaga" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver vaga</a> <a href="~/Home/RemoverCandidatura/@v.CodVaga"><i class="fa fa-minus-square" aria-hidden="true"></i> Remover candidatura</a></span></li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="dica">Você ainda não se candidatou a nenhuma vaga</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="limpar"></div>
+    }
+
+    @if (u.Admin)
+    {
+        <div class="painel-admin">
+            <h2 class="titulo">Painel do administrador</h2>
+            <div>
+                <div class="caixa-acao">
+                    <p><a href="~/Home/EditarDados"><i class="fa fa-pencil" aria-hidden="true"></i> Editar dados</a></p>
+                </div>
+                <div class="caixa-acao">
+                    <p><a href="~/Home/CadastrarCurso"><i class="fa fa-book" aria-hidden="true"></i> Cadastrar curso</a></p>
+                </div>
+                <div class="caixa-acao">
+                    <p><a href="~/Home/CadastrarVaga"><i class="fa fa-building" aria-hidden="true"></i> Cadastrar vaga</a></p>
+                </div>
+                <div class="caixa-acao">
+                    <p><a href="~/Home/PesquisarAlunos"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar alunos</a></p>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+}

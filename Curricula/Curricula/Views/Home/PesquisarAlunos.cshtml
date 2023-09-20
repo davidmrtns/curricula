@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Pesquisar alunos";
+    Curricula.Models.Usuario u = (Curricula.Models.Usuario)Session["Usuario"];
+    List<Curricula.Models.Aluno> listaAlunos = (List<Curricula.Models.Aluno>)TempData["listaAlunos"];
+
+    Curricula.Models.Itens i = new Curricula.Models.Itens();
+    var cursos = i.cursos(Model);
+}
+
+@if (u != null && u.Admin == true && Model != null)
+{
+    <section class="pesquisar">
+        <h2 class="titulo">Pesquisar alunos</h2>
+
+        <div class="centro pesquisar">
+            <form method="post" class="login centro">
+                <div class="centro filtros">
+                    <div class="divisao5 esquerda">
+                        <input type="text" placeholder="Nome do aluno" name="nomeAluno" id="campoPesquisaNome" />
+                        <p id="pCampoPesquisaNome"></p>
+                    </div>
+
+                    <div class="divisao5 esquerda">
+                        <input type="text" placeholder="Cidade" name="cidade" id="campoPesquisaCidade" />
+                        <p id="pCampoPesquisaCidade"></p>
+                    </div>
+
+                    <div class="divisao5 esquerda">
+                        <input type="text" placeholder="Telefone" name="telefone" class="tel" />
+                    </div>
+
+                    <div class="divisao5 esquerda">
+                        <input type="text" placeholder="Palavras-chave" name="palavrasChave" id="campoPalavrasChave" />
+                        <p id="pCampoPalavrasChave"></p>
+                    </div>
+
+                    <div class="divisao5 esquerda">
+                        @Html.DropDownList("cursoRealizado", new SelectList(cursos, "Value", "Text"))
+                    </div>
+
+                    <div class="limpar"></div>
+                </div>
+
+                <div class="centro">
+                    <input type="submit" value="Pesquisar" />
+                </div>
+            </form>
+        </div>
+
+        <div class="centro resultados">
+            <p><a href="~/Home/BuscarTodos">Listar todos os alunos</a></p>
+
+            @if (listaAlunos != null)
+            {
+                if (listaAlunos.Count > 0)
+                {
+                    <ul>
+                        @foreach (Curricula.Models.Aluno a in listaAlunos)
+                        {
+                            if (a.Empregavel)
+                            {
+                                <li><span>@a.CodAluno - @a.Nome - @a.CidadeResidencia <a href="~/Home/VerAluno/@a.CodAluno" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver perfil</a> <a href="~/Home/BaixarCurriculo/@a.CodAluno"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Baixar currículo</a></span></li>
+                            }
+                            else
+                            {
+                                <li><span>@a.CodAluno - @a.Nome - @a.CidadeResidencia <a href="~/Home/VerAluno/@a.CodAluno" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver perfil</a> - Não empregável</span></li>
+                            }
+                        }
+                    </ul>
+                }
+            else
+            {
+                <p>Nenhum aluno empregável com as ocorrências foi encontrado</p>
+            }
+        }
+        </div>
+    </section>
+}
+else
+{
+    <div class="erro">
+        <h2 class="titulo">Nada para mostrar aqui :(</h2>
+    </div>
+}
