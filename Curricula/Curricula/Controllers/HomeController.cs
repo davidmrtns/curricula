@@ -161,11 +161,11 @@ namespace Curricula.Controllers
             //validação de todos os dados recebidos
             nome = Verificacao.validarTexto(nome, 1, 20);
             sobrenome = Verificacao.validarTexto(sobrenome, 1, 20);
-            telefone = Verificacao.validarMascara(telefone, 14);
+            telefone = Verificacao.validarTelefone(telefone);
             bairro = Verificacao.validarTexto(bairro, 1, 30);
             cidade = Verificacao.validarTexto(cidade, 1, 30);
             estado = Verificacao.validarAbreviacao(estado, 2, 2);
-            cep = Verificacao.validarMascara(cep, 9);
+            cep = Verificacao.validarCep(cep);
             palavrasChave = Verificacao.validarPalavrasChave(palavrasChave, 0, 180);
             cursoRealizado = Verificacao.validarAbreviacao(cursoRealizado, 2, 5);
             nomeUsuario = Verificacao.validarNomeUsuario(nomeUsuario);
@@ -264,11 +264,11 @@ namespace Curricula.Controllers
 
                     //validação dos campos para atualização
                     nomeCompleto = Verificacao.validarTexto(nomeCompleto, 1, 40);
-                    telefone = Verificacao.validarMascara(telefone, 14);
+                    telefone = Verificacao.validarTelefone(telefone);
                     bairro = Verificacao.validarTexto(bairro, 1, 30);
                     cidade = Verificacao.validarTexto(cidade, 1, 30);
                     estado = Verificacao.validarAbreviacao(estado, 2, 2);
-                    cep = Verificacao.validarMascara(cep, 9);
+                    cep = Verificacao.validarCep(cep);
                     cursoRealizado = Verificacao.validarAbreviacao(cursoRealizado, 2, 5);
                     palavrasChave = Verificacao.validarPalavrasChave(palavrasChave, 0, 180);
 
@@ -481,7 +481,7 @@ namespace Curricula.Controllers
             //tamanho mínimo 0 pois os campos podem ser deixados em branco
             nomeAluno = Verificacao.validarTexto(nomeAluno, 0, 40);
             cidade = Verificacao.validarTexto(cidade, 0, 30);
-            telefone = Verificacao.validarMascara(telefone, 14);
+            telefone = Verificacao.validarTelefone(telefone);
             palavrasChave = Verificacao.validarPalavrasChave(palavrasChave, 0, 180);
             cursoRealizado = Verificacao.validarAbreviacao(cursoRealizado, 2, 5);
 

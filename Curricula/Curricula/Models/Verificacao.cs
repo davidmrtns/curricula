@@ -16,7 +16,7 @@ namespace Curricula.Models
             {
                 if (dado.StartsWith(" ") || dado.EndsWith(" "))
                 {
-                    //espaços no início e fim do dado são removidos
+                    //remove espaços em excesso
                     dado = dado.Trim();
                 }
 
@@ -31,7 +31,6 @@ namespace Curricula.Models
                 dado = null;
             }
 
-            //o dado é retornado
             return dado;
         }
 
@@ -58,8 +57,8 @@ namespace Curricula.Models
             return palavrasChave;
         }
 
-        //método para validar campos com máscara
-        public static string validarMascara(string dado, int tamanho)
+        //método para validar telefone
+        public static string validarTelefone(string dado)
         {
             if (dado.Contains("_"))
             {
@@ -67,13 +66,38 @@ namespace Curricula.Models
                 dado = dado.Replace("_", "");
             }
 
-            if (dado.Length != tamanho)
+            //caracteres especiais removidos
+            dado = dado.Replace("(", "");
+            dado = dado.Replace(")", "");
+            dado = dado.Replace("-", "");
+            dado = dado.Replace(" ", "");
+
+            if (dado.Length != 11 && dado.Length != 10)
             {
                 //se o tamanho do dado não igualar ao tamanho informado, o dado é nulo
                 dado = null;
             }
 
-            //retorna o dado
+            return dado;
+        }
+
+        //método para validar CEP
+        public static string validarCep(string dado)
+        {
+            if (dado.Contains("_"))
+            {
+                //nos campos com máscara, os espaços em brancos possuem underline. Portanto, se houver algum underline, ele é removido
+                dado = dado.Replace("_", "");
+            }
+
+            dado = dado.Replace("-", "");
+
+            if (dado.Length != 8)
+            {
+                //se o tamanho do dado não igualar ao tamanho informado, o dado é nulo
+                dado = null;
+            }
+
             return dado;
         }
 
@@ -86,7 +110,6 @@ namespace Curricula.Models
                 dado = null;
             }
 
-            //o dado é retornado
             return dado;
         }
 
@@ -99,7 +122,6 @@ namespace Curricula.Models
                 senha = null;
             }
 
-            //retorna a senha
             return senha;
         }
 
@@ -128,7 +150,6 @@ namespace Curricula.Models
                 dado = null;
             }
 
-            //o dado é retornado
             return dado;
         }
 
@@ -155,7 +176,6 @@ namespace Curricula.Models
                 dado = null;
             }
 
-            //o dado é retornado
             return dado;
         }
 
@@ -205,7 +225,6 @@ namespace Curricula.Models
                 dadoFinal = null;
             }
 
-            //retorna o dado final
             return dadoFinal;
         }
     }

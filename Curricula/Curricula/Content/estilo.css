@@ -487,6 +487,7 @@ div.vagas div.candidaturas p.dica, div.vagas div.vagas-disponiveis p.dica{
     font-style: inherit;
     color: #c7baff;
     margin-top: 24px;
+    font-size: 13px;
 }
 
 section.info-vaga, section.cadastro, section.pesquisar, section.info-aluno, div.painel-admin, div.erro{
@@ -895,6 +896,7 @@ section.pesquisar div.resultados ul{
 
     div.menu-lateral div.info-user div.seta-colapsar{
         display: block;
+        cursor: pointer;
     }
 
     div.menu-lateral h3.ocupacao{

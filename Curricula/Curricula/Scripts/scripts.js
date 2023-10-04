@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('.tel').inputmask("(99)99999-9999");
+    $('.tel').inputmask("(99) 9999[9]-9999");
     $('.cep').inputmask("99999-999");
 
     $('#mudarSenha').bind("click", function () { habilitarSecao('secaoMudarSenha') });

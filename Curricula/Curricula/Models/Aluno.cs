@@ -126,6 +126,11 @@ namespace Curricula.Models
                     PalavrasChave = leitor["palavras_chave"].ToString();
                     Empregavel = (bool) leitor["empregavel"];
 
+                    if (Telefone.Length == 10)
+                    {
+                        Telefone = Telefone.Insert(6, "-");
+                    }
+
                     //criado o objeto aluno com dados do banco
                     aluno = new Aluno(CodAluno, Nome, Bairro, CidadeResidencia, Estado, Cep, DataNascimento, Telefone, PalavrasChave, Empregavel);
                 }
