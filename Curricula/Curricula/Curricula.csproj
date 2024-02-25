@@ -175,13 +175,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Aluno.cs" />
-    <Compile Include="Models\Conexao.cs" />
+    <Compile Include="Classes\Conexao.cs" />
     <Compile Include="Models\Curriculo.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Itens.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Vaga.cs" />
-    <Compile Include="Models\Verificacao.cs" />
+    <Compile Include="Classes\Verificacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

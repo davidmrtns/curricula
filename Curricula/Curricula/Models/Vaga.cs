@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Curricula.Classes;
 
 namespace Curricula.Models
 {

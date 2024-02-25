@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using Curricula.Classes;
 
 namespace Curricula.Models
 {

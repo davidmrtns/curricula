@@ -40,7 +40,7 @@
             @if (lista != null)
             {
                 <ul>
-                    @foreach (Curriculum.Models.Curso c in lista)
+                    @foreach (Curricula.Models.Curso c in lista)
                     {
                         <li><span>@c.NomeCurso (@c.AbrevCurso) <a href="~/Home/ExcluirCurso/@c.AbrevCurso" class="remover excluirCurso"><i class="fa fa-trash" aria-hidden="true"></i> Apagar curso</a></span></li>
                     }

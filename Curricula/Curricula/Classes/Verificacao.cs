@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 
-namespace Curricula.Models
+namespace Curricula.Classes
 {
     public static class Verificacao
     {
