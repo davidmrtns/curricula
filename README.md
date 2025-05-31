@@ -1,16 +1,23 @@
 # <img src="/Curricula/Content/Imagens/curricula-logo.svg" width="25px"> Curricula
 
+![CSharp](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white&style=for-the-badge)
+![DotNet](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white&style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E&style=for-the-badge)
+
 ## Descrição do projeto
-O Curricula é um projeto Web ASP.NET (.NET Framework 4.6.1) com arquitetura MVC destinado a armazenar currículos e informações de alunos de instituições de ensino que estejam em busca de emprego. A aplicação conta com contas de administrador responsáveis por lançar vagas para candidaturas e que têm ao seu alcance todos os currículos cadastrados no site, os quais podem ser localizados através de um sistema de pesquisa completo e com filtros avançados.
+Curricula é uma aplicação web desenvolvida em ASP.NET Framework 4 com arquitetura MVC, voltada para o armazenamento e gerenciamento de currículos de alunos em busca de oportunidades profissionais. O sistema permite que administradores cadastrem vagas de emprego e visualizem os currículos cadastrados, com funcionalidades de busca avançada e filtros para facilitar o processo de seleção.
 
-## Status do projeto
-O projeto está **finalizado**.
+## Funcionalidades
+- 🏢 **Cadastro de vagas**: administradores podem inserir novas oportunidades de emprego na plataforma, vinculando-as aos cursos oferecidos na instituição;
+- 📝 **Cadastro de currículos**: alunos podem se cadastrar e enviar seus currículos para candidatura à uma vaga;
+- 🔍 **Busca avançada**: sistema de pesquisa de currículos eficiente com filtros por área/curso, palavras-chave e localização;
+- 🗂️ **Visualização e seleção de currículos**: administradores podem visualizar os currículos enviados pelos alunos e repassá-los para a empresa responsável pela vaga.
 
-## Tecnologias utilizadas
-- A arquitetura da aplicação é ASP.NET Framework 4.6.1 no padrão MVC;
-- O Backend foi desenvolvido em C#;
-- O Frontend foi desenvolvido em HTML, CSS e Javascript (JQuery);
-- O banco de dados foi arquitetado com MySQL.
+## Desenvolvimento
+### Tecnologias utilizadas
+- **Backend**: ASP.NET Framework 4;
+- **Frontend**: ASP.NET Razor, Javascript;
+- **Banco de dados**: MySQL.
 
-## Autores
-David Martins - Backend, Frontend e Banco de Dados
+## Autor
+- David Martins - [@davidmrtns](https://github.com/davidmrtns/)
